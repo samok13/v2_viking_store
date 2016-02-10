@@ -1,19 +1,19 @@
 class User < ActiveRecord::Base
   include Recentable
 
-  has_many :addresses
-  has_many :orders
+  has_many :addresses, :dependent => :destroy
+  has_many :orders, :dependent => :destroy
 
   belongs_to :default_billing_address, class_name: "Address", foreign_key: :billing_id
   belongs_to :default_shipping_address, class_name: "Address", foreign_key: :shipping_id
 
   has_many :products, through: :orders
 
-  has_many :credit_cards
+  has_many :credit_cards, :dependent => :destroy
 
   validates :first_name, :last_name, presence: true, length: { maximum: 64 }
 
-  validates :email, presence: true, format: { with: /@/, message: "Needs an @!!!"}
+  validates :email, presence: true, format: { with: /@/, message: "Please add an @."}
 
   def self.get_all_with_billing_location
     User.select("users.*, c.name AS c_name, s.name AS s_name")

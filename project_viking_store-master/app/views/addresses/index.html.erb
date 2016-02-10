@@ -30,7 +30,11 @@
       <% @addresses.each do |a| %>
       <tr>
         <td><%= a.id %></td>
+        <% if a.user %>
         <td><%= link_to "#{a.user.first_name} #{a.user.last_name}", user_path(a.user_id) %></td>
+        <% else %>
+        <td>N/A</td>
+        <%end %>
         <td><%= a.street_address %></td>
         <td><%= a.city.name %></td>
         <td><%= a.state.name %></td>

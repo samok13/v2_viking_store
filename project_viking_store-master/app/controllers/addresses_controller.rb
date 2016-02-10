@@ -1,7 +1,7 @@
 class AddressesController < ApplicationController
 
   def index
-    @addresses = Address.all
+    @addresses = Address.all.order("id")
     @user = params[:user_id].to_i
     if @user != 0
       @user = User.find(@user)

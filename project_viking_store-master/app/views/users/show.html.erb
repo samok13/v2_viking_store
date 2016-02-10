@@ -110,9 +110,9 @@
             <td><%= o.checkout_date %></td>
             <td><%= number_to_currency(o.value) %></td>
             <td><%= o.checkout_date ? "PLACED" : "UNPLACED"%></td>
-            <td><%= link_to "Show", "#" %></td>
-            <td><%= link_to "Edit", "#" %></td>
-            <td><%= link_to "Delete", "#" %></td>
+            <td><%= link_to "Show", order_path(o.id) %></td>
+            <td><%= link_to "Edit", edit_order_path(o.id) %></td>
+            <td><%= link_to "Delete", order_path(o.id), method: "delete", data: {confirm: "Are you sure?"} %></td>
           </tr>
         <% end %>
       </tbody>

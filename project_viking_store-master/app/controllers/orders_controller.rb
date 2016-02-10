@@ -83,5 +83,21 @@ class OrdersController < ApplicationController
   end
 
   def destroy
+    @order = Order.find(params[:id])
+
+    if @order.destroy
+      flash[:success] = "Order has successfully been deleted."
+      redirect_to orders_path
+    else
+      flash[:error] = "The order was not able to be deleted."
+      render :show
+    end
+  end
+
+
+private
+
+  def order_params
+    params.require(:order).permit(:billing_id,:shipping_id,:credit_card_id,:user_id,{order_contents_attributes: [:product_id, :quantity, :id]})
   end
 end
